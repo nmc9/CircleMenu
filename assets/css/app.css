@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'GothamHTF';
-  src: url('fonts/GothamHTF.woff') format('woff');
+  src: url('../fonts/GothamHTF.woff') format('woff');
 }
 
 @font-face {
   font-family: 'GothamBold';
-  src: url('fonts/gothambold1.woff') format('woff');
+  src: url('../fonts/gothambold1.woff') format('woff');
 }
 
 #centerSVG{
@@ -19,13 +19,9 @@
 #wheelContainer{
   position:relative;
   height: 600px;
-    border-top: 1px solid #ccc
+  border-top: 1px solid #ccc
 
 }
-
-/*body{
-  height: 100%;
-}*/
 
 .centerme svg{
   position:absolute !important;

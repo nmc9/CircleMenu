@@ -2,8 +2,8 @@
 var scale = 1.5;
 var orbs = [];
 var line;
-var originX = 400 * scale;
-var originY = 400 * scale;
+var originX = 1000;
+var originY = 500;
 var xoffset = Math.sin(0);
 var yoffset = 0 - Math.cos(0);
 var roffset = 40 * scale;
@@ -11,6 +11,7 @@ var duration = 1000;
 var wheelRadius = 175 * scale;
 var selectedPercent = 1.06;
 var deleteNodes = function() {
+  console.log(orbs);
   for (var i = 0; i < orbs.length; i++) {
    orbs[i].transition()
    .duration(duration)
@@ -22,21 +23,8 @@ var deleteNodes = function() {
   orbs.splice(0,orbs.length)
 };
 
-
-/* build SVG  viewBoxes */
-var vbWidthScale = wheelRadius + 300*scale
-var hy = 150;
-var vbHeightScale = wheelRadius + hy*scale
-
-var vbx = originX - vbWidthScale;
-var vby = originY - vbHeightScale;
-var vbWidth = vbWidthScale * 2;
-var vbHeight = vbHeightScale * 2 - hy*scale;
-var viewBox = vbx + " " + vby + " " + vbWidth + " " + vbHeight;
 /*Build the Center SVG */
-var centerSVG = d3.select("#centerSVG")
-.attr("viewBox",viewBox);
-
+var centerSVG = d3.select("#centerSVG");
 var centerImagePath =
 "images/Center.svg";
 var centerImageDimension = 125 * scale;
@@ -54,8 +42,7 @@ var centerImage = centerSVG
 /* End Center SVG */
 
 /* Build Behind SVG */
-var behindSVG = d3.select("#behindSVG")
-.attr("viewBox",viewBox);
+var behindSVG = d3.select("#behindSVG");
 var behindRadius = wheelRadius * .953;
 
 var centerCircle = behindSVG
@@ -76,7 +63,7 @@ wheelnav.cssMode = true;
 var wcolors = ["#FCAE18", "#2EA77A", "#20A1B6", "#364485", "#E2391A"];
 //Wheel Size and Location
 wheel.wheelRadius = wheelRadius;
-wheel.centerX = originX ;
+wheel.centerX = originX;
 wheel.centerY = originY;
 wheel.colors = wcolors;
 wheel.selectedPercent = selectedPercent;
@@ -112,15 +99,6 @@ wheel.initWheel([
   "imgsrc:images/circle-05.png",
 
   ]);
-
-// var vbScale = 100
-// var vbx = originX - vbScale;
-// var vby = originY - vbScale;
-// var vbWidth = vbScale * 2;
-// var vbHeight = vbScale * 2;
-// var viewBox = vbx + " " + vby + " " + vbWidth + " " + vbHeight;
-d3.select("#wheelDiv svg")
-.attr("viewBox",viewBox);
 
 /* Tweek title position */
 wheel.navItems[0].titleWidth = 60 * scale;
@@ -549,7 +527,7 @@ var text_04_block = [
 "integration as easy as possible"
 ]
 var text_05_01 = [
-"Import, Don't",
+"Import, Don’t",
 "Keystroke Meter Reads",
 "Speed bill calculation  meter read systems.",
 "with interfaces to most major",
