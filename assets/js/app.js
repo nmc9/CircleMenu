@@ -1,26 +1,30 @@
-/* Global Variables*/
 
-function make_circle_menu(rootUrl){
-// var rootUrl = "assets/images/circle/";
-var scale = 1.5;
-var orbs = [];
-var line;
-var originX = 400 * scale;
-var originY = 400 * scale;
-var xoffset = Math.sin(0);
-var yoffset = 0 - Math.cos(0);
-var roffset = 40 * scale;
-var duration = 1000;
-var wheelRadius = 175 * scale;
-var selectedPercent = 1.06;
-var deleteNodes = function() {
-  for (var i = 0; i < orbs.length; i++) {
-   orbs[i].transition()
-   .duration(duration)
-   .attr({"x":originX, "y":originY})
-   .attr("opacity", 0)
-   .remove();
- }
+function make_circle_menu(rootUrl,_data){
+  data = _data['data'];
+  size = _data['size'];
+  func = _data['func'];
+
+  /* Global Variables*/
+  // var rootUrl = "assets/images/circle/";
+  var scale = 1.5;
+  var orbs = [];
+  var line;
+  var originX = 400 * scale;
+  var originY = 400 * scale;
+  var xoffset = Math.sin(0);
+  var yoffset = 0 - Math.cos(0);
+  var roffset = 40 * scale;
+  var duration = 1000;
+  var wheelRadius = 175 * scale;
+  var selectedPercent = 1.06;
+  var deleteNodes = function() {
+    for (var i = 0; i < orbs.length; i++) {
+     orbs[i].transition()
+     .duration(duration)
+     .attr({"x":originX, "y":originY})
+     .attr("opacity", 0)
+     .remove();
+   }
   //clear orbs
   orbs.splice(0,orbs.length)
 };
@@ -275,7 +279,7 @@ var textAttr = function(color,size){
   };
 }
 
-orbitSVG.appendText = function(rotation,headerLength,bubblesize,positionObject,arrayOfText,headerCount = 1){
+orbitSVG.appendText = function(rotation,headerLength,bubblesize,positionObject,arrayOfText){
   var textPadding = (2 * scale);
   var xPadding = bubbleRadius - (10 * scale);
   var yPadding = bubbleRadius / 4;
@@ -284,6 +288,7 @@ orbitSVG.appendText = function(rotation,headerLength,bubblesize,positionObject,a
   if(!(headerLength instanceof Array)){
     headerLength = [headerLength];
   }
+  headerCount = headerLength.length;
   for(var i = 0; i < headerCount; i++){
     var x = this.append("text")
     .text(arrayOfText[i])
@@ -312,10 +317,11 @@ orbitSVG.appendText = function(rotation,headerLength,bubblesize,positionObject,a
   }
 }
 
-orbitSVG.appendBlock = function(rotation,imageObject,linePath,fill,size,positionObject,headerLength,arrayOfText,headerCount = 1){
+orbitSVG.appendBlock = function(rotation,imageObject,linePath,fill,size,positionObject,headerLength,arrayOfText){
   if(!(headerLength instanceof Array)){
     headerLength = [headerLength];
   }
+  headerCount = headerLength.length;
   imageObject.width = imageObject.width *scale;
   imageObject.height = imageObject.height* scale;
 
@@ -433,223 +439,76 @@ var itemStart = {
   originY: originY,
   distance: 0
 }
-var text_01_01 = [
-"Local Area Networks",
-"Software and Data live on",
-"your network. You get",
-"unlimited uses"
-]
-var text_01_02 = [
-"Cloud",
-"Your software and data",
-"are safe and secure in the",
-"cloud. Unlimited users",
-"access from anywhere."
-]
-var text_01_03 = [
-"Service Bureau",
-"Our trained and experienced",
-"staff takes over any part or",
-"all of your billing tasks."
-]
-var text_01_block = [
-"CHOICE OF",
-"PLATFORM",
-"Diversified Utility Billing",
-"software will run on a number",
-"of different platforms from",
-"your in-house LAN to the",
-"cloud. It's designed to make",
-"integration as easy as possible"
-]
-var text_02_01 = [
-"Standard Operating",
-"Procedures",
-"Establish rules for every task",
-"in the billing operation.",
-]
-var text_02_02 = [
-"Master Calendar",
-"Translates SOP rules into",
-"a daily action plan for",
-"each staffer.",
-]
-var text_02_03 = [
-"Dashboard",
-"Provides real-time status",
-"of schedule tasks that are",
-"in process or overdue.",
-]
-var text_02_04 = [
-"Mobile Work Orders",
-"Generate field service",
-"work orders electronically",
-"to track real-time status.",
-]
-var text_02_block = [
-"GET",
-"ORGANIZED!",
-"Diversified Utility Billing",
-"software will run on a number",
-"of different platforms from",
-"your in-house LAN to the",
-"cloud. It's designed to make",
-"integration as easy as possible"
-]
-var text_03_01 = [
-"Accept Online Payments",
-"Customers pay at their",
-"convenience and you",
-"collect 100%!"
-]
-var text_03_02 =[
-"Customer Web Portal",
-"Slash inbound calls by",
-"giving each customer",
-"access to their account",
-"info on the web."
-]
-var text_03_block = [
-"CUSTOMER",
-"SELF SERVICE",
-"Diversified Utility Billing",
-"software will run on a number",
-"of different platforms from",
-"your in-house LAN to the",
-"cloud. It's designed to make",
-"integration as easy as possible"
-]
-var text_04_01 = [
-"Import, Don’t",
-"Keystroke Meter Reads",
-"Speed bill calculation  meter read systems.",
-"with interfaces to most major",
-"meter read systems.",
-]
-var text_04_02 = [
-"Save Postage",
-"with Email Bills",
-"Generate email, post card",
-"or letter bills with checklist",
-"driven process.",
-]
-var text_04_03 = [
-"Stay on Top of",
-"Receivables",
-"Easily identify late payers,",
-"then generate late and shut",
-"off notices.",
-]
-var text_04_block = [
-"STREAMLINED",
-"BILLING",
-"PROCESSES",
-"Diversified Utility Billing",
-"software will run on a number",
-"of different platforms from",
-"your in-house LAN to the",
-"cloud. It's designed to make",
-"integration as easy as possible"
-]
-var text_05_01 = [
-"Import, Don't",
-"Keystroke Meter Reads",
-"Speed bill calculation  meter read systems.",
-"with interfaces to most major",
-"meter read systems.",
-]
-var text_05_02 = [
-"Save Postage",
-"with Email Bills",
-"Generate email, post card",
-"or letter bills with checklist",
-"driven process.",
-]
-var text_05_03 = [
-"Stay on Top of",
-"Receivables",
-"Easily identify late payers,",
-"then generate late and shut",
-"off notices.",
-]
-var text_05_block =[
-"SUPERCHARGED",
-"PAYMENT",
-"PROCESSING",
-"Diversified Utility Billing",
-"software will run on a number",
-"of different platforms from",
-"your in-house LAN to the",
-"cloud. It's designed to make",
-"integration as easy as possible"
-]
+
+
+var text_01_01 = data['text_01_01'];
+var text_01_02 = data['text_01_02'];
+var text_01_03 = data['text_01_03'];
+var text_01_block = data['text_01_block'];
+var text_02_01 = data['text_02_01'];
+var text_02_02 = data['text_02_02'];
+var text_02_03 = data['text_02_03'];
+var text_02_04 = data['text_02_04'];
+var text_02_block = data['text_02_block'];
+var text_03_01 = data['text_03_01'];
+var text_03_02 = data['text_03_02'];
+var text_03_block = data['text_03_block'];
+var text_04_01 = data['text_04_01'];
+var text_04_02 = data['text_04_02'];
+var text_04_03 = data['text_04_03'];
+var text_04_block = data['text_04_block'];
+var text_05_01 = data['text_05_01'];
+var text_05_02 = data['text_05_02'];
+var text_05_03 = data['text_05_03'];
+var text_05_block = data['text_05_block'];
 
 var displayNodes0 = function() {
   orbitSVG.appendLine(1, rootUrl + "arc-01.svg", lineSize,linePosition);
-  orbitSVG.appendBubble(0.8, rootUrl + "bubble-01-01.svg",bubbleSize,bubblePosition, function() {
 
-    window.location = "platforms#in-house";
-  });
-  orbitSVG.appendText(0.8,140,bubbleSize,bubblePosition,text_01_01);
-  orbitSVG.appendBubble(1, rootUrl + "bubble-01-02.svg",bubbleSize,bubblePosition, function() {
-    window.location = "home.php";
-  });
-  orbitSVG.appendText(.98,45,bubbleSize,bubblePosition,text_01_02);
+  orbitSVG.appendBubble(0.8, rootUrl + "bubble-01-01.svg",bubbleSize,bubblePosition,func['bubble_01_01']);
+  orbitSVG.appendText(0.8,size['text_01_01'],bubbleSize,bubblePosition,text_01_01);
 
-  orbitSVG.appendBubble(1.2, rootUrl + "bubble-01-03.svg",bubbleSize,bubblePosition, function() {
-    window.location = "#somethingstupid";
-  });
-  orbitSVG.appendText(1.2,110,bubbleSize,bubblePosition,text_01_03);
+  orbitSVG.appendBubble(1, rootUrl + "bubble-01-02.svg",bubbleSize,bubblePosition,func['bubble_01_02']);
+  orbitSVG.appendText(.98,size['text_01_02'],bubbleSize,bubblePosition,text_01_02);
+
+  orbitSVG.appendBubble(1.2, rootUrl + "bubble-01-03.svg",bubbleSize,bubblePosition,func['bubble_01_03']);
+  orbitSVG.appendText(1.2,size['text_01_03'],bubbleSize,bubblePosition,text_01_03);
   orbitSVG.appendBlock(3,
   {
     href:rootUrl + "block-01.png",
     width:75,
     height:75
   },
-  rootUrl + "line-01.svg","#fe921a",bubbleSize,bubblePosition,[110,110],text_01_block,2)
-
-
+  rootUrl + "line-01.svg","#fe921a",bubbleSize,bubblePosition,size['text_01_block'],text_01_block)
 };
 
 
 var displayNodes1 = function() {
   orbitSVG.appendLine(1, rootUrl + "arc-02.svg", longLineSize,linePosition);
-  orbitSVG.appendBubble(0.75, rootUrl + "bubble-02-01.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(0.73,[135,80],bubbleSize,bubblePosition,text_02_01,2);
-  orbitSVG.appendBubble(.91, rootUrl + "bubble-02-02.svg",bubbleSize,bubblePosition, function() {
-    window.location = "#somethingstupid";
-  });
-  orbitSVG.appendText(0.90,110,bubbleSize,bubblePosition,text_02_02);
-  orbitSVG.appendBubble(1.08, rootUrl + "bubble-02-03.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(1.08,75,bubbleSize,bubblePosition,text_02_03);
-  orbitSVG.appendBubble(1.25, rootUrl + "bubble-02-04.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(1.26,140,bubbleSize,bubblePosition,text_02_04);
+  orbitSVG.appendBubble(0.75, rootUrl + "bubble-02-01.svg",bubbleSize,bubblePosition,func['bubble_02_01']);
+  orbitSVG.appendText(0.73,size['text_02_01'],bubbleSize,bubblePosition,text_02_01);
+  orbitSVG.appendBubble(.91, rootUrl + "bubble-02-02.svg",bubbleSize,bubblePosition,func['bubble_02_02']);
+  orbitSVG.appendText(0.90,size['text_02_02'],bubbleSize,bubblePosition,text_02_02);
+  orbitSVG.appendBubble(1.08, rootUrl + "bubble-02-03.svg",bubbleSize,bubblePosition,func['bubble_02_03']);
+  orbitSVG.appendText(1.08,size['text_02_03'],bubbleSize,bubblePosition,text_02_03);
+  orbitSVG.appendBubble(1.25, rootUrl + "bubble-02-04.svg",bubbleSize,bubblePosition,func['bubble_02_04']);
+  orbitSVG.appendText(1.26,size['text_02_04'],bubbleSize,bubblePosition,text_02_04);
   orbitSVG.appendBlock(3,
   {
     href:rootUrl + "block-02.png",
     width:70,
     height:70
   },
-  rootUrl + "line-02.svg","#31a879",bubbleSize,bubblePosition,[42,130],text_02_block,2)
+  rootUrl + "line-02.svg","#31a879",bubbleSize,bubblePosition,size['text_02_block'],text_02_block)
 };
 
 
 var displayNodes2 = function() {
   orbitSVG.appendLine(1.34, rootUrl + "arc-03.svg", bottomLineSize,linePosition);
-  orbitSVG.appendBubble(1.2, rootUrl + "bubble-03-01.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(1.2,160,bubbleSize,bubblePosition,text_03_01);
-  orbitSVG.appendBubble(1.4, rootUrl + "bubble-03-02.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(1.4,150,bubbleSize,bubblePosition,text_03_02);
+  orbitSVG.appendBubble(1.2, rootUrl + "bubble-03-01.svg",bubbleSize,bubblePosition,func['bubble_03_01']);
+  orbitSVG.appendText(1.2,size['text_03_01'],bubbleSize,bubblePosition,text_03_01);
+  orbitSVG.appendBubble(1.4, rootUrl + "bubble-03-02.svg",bubbleSize,bubblePosition,func['bubble_03_02']);
+  orbitSVG.appendText(1.4,size['text_03_02'],bubbleSize,bubblePosition,text_03_02);
 
   orbitSVG.appendBlock(3,
   {
@@ -657,7 +516,7 @@ var displayNodes2 = function() {
     width:85,
     height:85
   }
-  ,rootUrl + "line-03.svg","#229fb8",bubbleSize,bubblePosition,[115,135],text_03_block,2)
+  ,rootUrl + "line-03.svg","#229fb8",bubbleSize,bubblePosition,size['text_03_block'],text_03_block)
 };
 
 
@@ -665,58 +524,38 @@ var displayNodes2 = function() {
 
 var displayNodes3 = function() {
   orbitSVG.appendLine(3, rootUrl + "arc-04.svg", longLineSize,linePosition);
-  orbitSVG.appendBubble(3.2, rootUrl + "bubble-04-01.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(3.22,[90,160],bubbleSize,bubblePosition,text_04_01,2);
-  orbitSVG.appendBubble(3, rootUrl + "bubble-04-02.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(3.01,[95,110],bubbleSize,bubblePosition,text_04_02,2);
-
-
-  orbitSVG.appendBubble(2.8, rootUrl + "bubble-04-03.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(2.8,[95,82],bubbleSize,bubblePosition,text_04_03,2);
+  orbitSVG.appendBubble(3.2, rootUrl + "bubble-04-01.svg",bubbleSize,bubblePosition,func['bubble_04_01']);
+  orbitSVG.appendText(3.22,size['text_04_01'],bubbleSize,bubblePosition,text_04_01);
+  orbitSVG.appendBubble(3, rootUrl + "bubble-04-02.svg",bubbleSize,bubblePosition,func['bubble_04_02']);
+  orbitSVG.appendText(3.01,size['text_04_02'],bubbleSize,bubblePosition,text_04_02);
+  orbitSVG.appendBubble(2.8, rootUrl + "bubble-04-03.svg",bubbleSize,bubblePosition,func['bubble_04_03']);
+  orbitSVG.appendText(2.8,size['text_04_03'],bubbleSize,bubblePosition,text_04_03);
   orbitSVG.appendBlock(1,
   {
     href:rootUrl + "block-04.png",
     width:75,
     height:80
   },
-  rootUrl + "line-04.svg","#2d457b",bubbleSize,bubblePosition,[145,80,120],text_04_block,3)
-
+  rootUrl + "line-04.svg","#2d457b",bubbleSize,bubblePosition,size['text_04_block'],text_04_block)
 };
 
 
 
 var displayNodes4 = function() {
   orbitSVG.appendLine(3, rootUrl + "arc-05.svg", lineSize,linePosition);
-  orbitSVG.appendBubble(3.2, rootUrl + "bubble-05-01.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-
-  orbitSVG.appendText(3.22,[90,160],bubbleSize,bubblePosition,text_05_01,2);
-
-  orbitSVG.appendBubble(3, rootUrl + "bubble-05-02.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(3.01,[95,110],bubbleSize,bubblePosition,text_05_02,2);
-
-
-  orbitSVG.appendBubble(2.8, rootUrl + "bubble-05-03.svg",bubbleSize,bubblePosition, function() {
-    alert("clicked");
-  });
-  orbitSVG.appendText(2.8,[95,82],bubbleSize,bubblePosition,text_05_03,2);
-
+  orbitSVG.appendBubble(3.2, rootUrl + "bubble-05-01.svg",bubbleSize,bubblePosition,func['bubble_05_01']);
+  orbitSVG.appendText(3.22,size['text_05_01'],bubbleSize,bubblePosition,text_05_01);
+  orbitSVG.appendBubble(3, rootUrl + "bubble-05-02.svg",bubbleSize,bubblePosition,func['bubble_05_02'] );
+  orbitSVG.appendText(3.01,size['text_05_02'],bubbleSize,bubblePosition,text_05_02);
+  orbitSVG.appendBubble(2.8, rootUrl + "bubble-05-03.svg",bubbleSize,bubblePosition,func['bubble_05_03']);
+  orbitSVG.appendText(2.8,size['text_05_03'],bubbleSize,bubblePosition,text_05_03);
   orbitSVG.appendBlock(1,
   {
     href:rootUrl + "block-05.png",
     width:70,
     height:70
-  }
-  ,rootUrl + "line-05.svg","#dc3319",bubbleSize,bubblePosition,[175,95,145],text_05_block,3)
+  },
+  rootUrl + "line-05.svg","#dc3319",bubbleSize,bubblePosition,size['text_05_block'],text_05_block)
 };
 
 

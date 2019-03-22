@@ -6,8 +6,8 @@
 	<link href="assets/css/app.css" rel="stylesheet">
 </head>
 <body>
-	<section>
-		<div id="wheelContainer" class="circle_menu_section">
+	<section class="circle_menu_section">
+		<div id="wheelContainer">
 			<div id="wheelDiv" class="centerme">
 			</div>
 
@@ -24,9 +24,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/wheelnav@1.7.1/js/dist/raphael.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/wheelnav@1.7.1/js/dist/wheelnav.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.0.0/d3.min.js"></script>
+
+	<!-- the order of these MATTER  data/app -->
+	<script src="assets/js/data.js"></script>
 	<script src="assets/js/app.js"></script>
+
 	<script>
-		make_circle_menu("assets/images/circle/");
+		make_circle_menu("assets/images/circle/",getData());
 	</script>
 </body>
 </html>
